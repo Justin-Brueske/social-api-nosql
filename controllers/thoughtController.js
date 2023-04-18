@@ -18,7 +18,7 @@ const thoughtController = {
     .then(userData => res.json(userData))
     .catch((err) => res.status(500).json(err));
     },
-    //update thought by it's id
+    // update thought by it's id
     updateThought(req, res) {
         Thought.findOneAndUpdate({
             _id: req.params.id
@@ -31,7 +31,21 @@ const thoughtController = {
             !thought ? res.status(404).json({message: 'No thought by ID'}) : res.json(thought);
         }).catch((err) => res.status(500).json(err));
     },
-
+    // getThoughtById
+    getThoughtById({ params }, res) {
+        Thought.findOne({ _id: params.id })
+        .then((dbThoughtData) => {
+            if (!dbThoughtData) {
+            res.status(404).json({ message: "No thought with this ID" });
+            return;
+            }
+            res.json(dbThoughtData);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(400).json(err);
+        });
+    },
 
 
 };
