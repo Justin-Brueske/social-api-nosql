@@ -38,9 +38,16 @@ const userController = {
                 _id: {
                     $in: user.thoughts
                 }
-        })).then(() => res.json({ message: 'User and associated apps deleted!' })).catch((err) => res.status(500).json(err));
+        })).then(() => res.json({ message: 'User and associated apps deleted!' }))
+        .catch((err) => res.status(500).json(err));
     },
-
+    // getUserById,
+    getUserById(req, res) {
+        User.findOne({
+             _id: req.params.id })
+             .then((user) => !user ? res.status(404).json({ message: 'No user with that ID' }) : res.json(user))
+             .catch((err) => res.status(500).json(err));
+    },
 };
 
     module.exports = userController;
