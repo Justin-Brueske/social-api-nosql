@@ -28,7 +28,7 @@ const thoughtController = {
             runValidators: true,
             new: true
         }).then((thought) => {
-            !thought ? res.status(404).json({message: 'No thought by ID'}) : res.json(thought);
+            !thought ? res.status(404).json({message: 'No thought with this ID'}) : res.json(thought);
         }).catch((err) => res.status(500).json(err));
     },
     // getThoughtById
@@ -62,8 +62,6 @@ const thoughtController = {
     },
     // add Reaction
     addReaction(req, res) {
-        console.log('You are adding a reaction');
-        console.log(req.body);
         Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
         { $addToSet: { reactions: req.body} },
@@ -73,7 +71,7 @@ const thoughtController = {
             !thought
             ? res
                 .status(404)
-                .json({ message: 'No friend found with that ID :(' })
+                .json({ message: 'No thought found with that ID' })
             : res.json(thought)
         )
         .catch((err) => res.status(500).json(err));
@@ -90,7 +88,7 @@ const thoughtController = {
             !thought
             ? res
                 .status(404)
-                .json({ message: 'No thought found with that ID :(' })
+                .json({ message: 'No thought found with that ID' })
             : res.json(thought)
         )
         .catch((err) => res.status(500).json(err));

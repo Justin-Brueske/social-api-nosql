@@ -24,7 +24,7 @@ const userController = {
             new: true
         })
         .then((user) => {
-            !user ? res.status(404).json({ message: 'No user' }) : res.json(user);
+            !user ? res.status(404).json({ message: 'No user with that ID' }) : res.json(user);
         }).catch((err) => res.status(500).json(err));
     },
     // delete user
@@ -38,7 +38,7 @@ const userController = {
                 _id: {
                     $in: user.thoughts
                 }
-        })).then(() => res.json({ message: 'User and associated apps deleted!' }))
+        })).then(() => res.json({ message: 'User and everything else deleted!' }))
         .catch((err) => res.status(500).json(err));
     },
     // getUserById,
@@ -50,8 +50,6 @@ const userController = {
     },
     // addFriend
     addFriend(req, res) {
-        console.log('You are adding a friend');
-        console.log(req.body);
         User.findOneAndUpdate({
             _id: req.params.id
         }, {
@@ -61,7 +59,7 @@ const userController = {
         }, {
             runValidators: true,
             new: true
-        }).then((user) => !user ? res.status(404).json({ message: 'No friend found with that ID :(' }) : res.json(user))
+        }).then((user) => !user ? res.status(404).json({ message: 'No friend found with that ID' }) : res.json(user))
         .catch((err) => res.status(500).json(err));
     },
     // removeFriend
@@ -75,7 +73,7 @@ const userController = {
         }, {
             runValidators: true,
             new: true
-        }).then((user) => !user ? res.status(404).json({ message: 'No friend found with that ID :(' }) : res.json(user))
+        }).then((user) => !user ? res.status(404).json({ message: 'No friend found with that ID' }) : res.json(user))
         .catch((err) => res.status(500).json(err));
     }
 };
