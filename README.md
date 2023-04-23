@@ -13,4 +13,4 @@ This project uses Express, Mongoose and MongoDB to read, store and delete inform
 # Links
 [Code Repository](https://github.com/Justin-Brueske/social-api-nosql)
 
-[Video]()
+[Video](https://drive.google.com/file/d/153Rne0dyy6qE7tKXfQqAsTrLdRoldCJY/view)
